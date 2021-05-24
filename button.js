@@ -3,10 +3,22 @@ export default class Button {
     this.x = x;
     this.y = y;
     this.name = name;
+    this.color = color(137, 176, 174);
   }
+
   render() {
     noStroke();
-    fill(137, 176, 174);
+    if (
+      mouseX < this.x + 200 &&
+      mouseX > this.x &&
+      mouseY < this.y + 40 &&
+      mouseY > this.y
+    ) {
+      this.color = color(92, 138, 135);
+    } else {
+      this.color = color(137, 176, 174);
+    }
+    fill(this.color);
     rect(this.x, this.y, 200, 40, 30);
     fill(255);
     strokeWeight(1);
@@ -16,7 +28,6 @@ export default class Button {
   }
   hitTest() {
     if (
-      mouseIsPressed &&
       mouseX < this.x + 200 &&
       mouseX > this.x &&
       mouseY < this.y + 40 &&

@@ -1,6 +1,7 @@
 import Button from "./button.js";
 import Animal from "./animal.js";
-//import Statusbar from "./statusBar";
+import Happiness from "./statusbar.js";
+import Care from "./care.js";
 
 export default class Display {
   constructor(x, y) {
@@ -9,6 +10,8 @@ export default class Display {
     this.foodButton = new Button(600, 150, "feed");
     this.drinkButton = new Button(600, 220, "give Water");
     this.animal = new Animal(this.x + 50, this.y + 150);
+    this.happy = new Happiness(270, 80, 30);
+    this.care = new Care(this.happy.currentValue);
   }
   background() {
     fill(250, 249, 249);
@@ -30,8 +33,9 @@ export default class Display {
     this.drinkButton.render();
     this.animal.render();
     this.coin();
+    this.happy.render();
   }
-  hallo() {
-    console.log("hi");
+  system() {
+    this.happy.currentValue = this.care.feed(this.foodButton.hitTest());
   }
 }
