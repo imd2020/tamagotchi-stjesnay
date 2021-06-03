@@ -1,6 +1,6 @@
 import Button from "./button.js";
 import Animal from "./animal.js";
-import Happiness from "./statusbar.js";
+import { HappinessBar, LevelBar } from "./statusbar.js";
 import Care from "./care.js";
 
 export default class Display {
@@ -10,8 +10,9 @@ export default class Display {
     this.foodButton = new Button(600, 150, "feed");
     this.drinkButton = new Button(600, 220, "give Water");
     this.animal = new Animal(this.x + 50, this.y + 150);
-    this.happy = new Happiness(270, 80, 30);
-    this.care = new Care(this.happy.currentValue);
+    this.happyBar = new HappinessBar(270, 80, 61, 150);
+    this.levelBar = new LevelBar(100, 80, 0, 150);
+    this.care = new Care(this.happyBar.currentValue);
   }
   background() {
     fill(250, 249, 249);
@@ -33,9 +34,19 @@ export default class Display {
     this.drinkButton.render();
     this.animal.render();
     this.coin();
-    this.happy.render();
+    this.happyBar.render();
+    this.levelBar.render();
   }
   system() {
-    this.happy.currentValue = this.care.feed(this.foodButton.hitTest());
+    this.happyBar.currentValue = this.care.feed(this.foodButton.hitTest());
+    this.happyBar.currentValue = this.care.drink(this.drinkButton.hitTest());
+    if (this.happyBar.currentValue % 15 === 0) {
+      this.levelBar.currentValue += 25;
+    }
+    if (this.levelBar.currentValue === this.levelBar.maxValue) {
+      this.animal.state += 1;
+      this.levelBar.currentValue = 0;
+      this.happyBar.currentValue = 61;
+    }
   }
 }

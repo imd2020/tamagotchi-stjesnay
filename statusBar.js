@@ -1,20 +1,25 @@
 export class Statusbar {
-  constructor(x, y, currentValue) {
+  constructor(x, y, currentValue, maxValue) {
     this.x = x;
     this.y = y;
     this.currentValue = currentValue;
-  }
-  hello() {
-    fill(0, 0, 255);
-    ellipse(this.x + 100, this.y, 50, 50);
+    this.maxValue = maxValue;
   }
 }
 
-export default class Happiness extends Statusbar {
-  constructor(x, y, currentValue) {
-    super(x, y, currentValue);
+export class HappinessBar extends Statusbar {
+  constructor(x, y, currentValue, maxValue) {
+    super(x, y, currentValue, maxValue);
   }
   render() {
+    if (this.currentValue > this.maxValue) {
+      this.currentValue = this.maxValue;
+      console.log("hi");
+      console.log(this.currentValue);
+    }
+    strokeWeight(1);
+    stroke(85, 91, 110);
+    fill(85, 91, 110);
     textSize(15);
     text("Happiness", this.x + 75, this.y - 10);
     noStroke();
@@ -38,7 +43,37 @@ export default class Happiness extends Statusbar {
     rect(this.x + 15, this.y, 15, 15);
     rect(this.x, this.y, 15, 15, 20, 0, 0, 20);
   }
-  hallo() {
-    console.log("Hello");
+}
+
+export class LevelBar extends Statusbar {
+  constructor(x, y, currentValue, maxValue) {
+    super(x, y, currentValue, maxValue);
+  }
+  render() {
+    if (this.currentValue > this.maxValue) {
+      this.currentValue = this.maxValue;
+    }
+    strokeWeight(1);
+    stroke(85, 91, 110);
+    fill(85, 91, 110);
+    textSize(15);
+    text("Level", this.x + 75, this.y - 10);
+    noStroke();
+
+    fill(200);
+    rect(this.x, this.y, 150, 15, 20);
+    fill(255, 214, 186);
+    rect(this.x, this.y, this.currentValue, 15, 20, 0, 0, 20);
+
+    strokeWeight(1);
+    stroke(85, 91, 110);
+    noFill();
+
+    rect(this.x + 125, this.y, 25, 15, 0, 20, 20, 0);
+    rect(this.x + 100, this.y, 25, 15);
+    rect(this.x + 75, this.y, 25, 15);
+    rect(this.x + 50, this.y, 25, 15);
+    rect(this.x + 25, this.y, 25, 15);
+    rect(this.x, this.y, 25, 15, 20, 0, 0, 20);
   }
 }

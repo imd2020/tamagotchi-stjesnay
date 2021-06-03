@@ -4,9 +4,14 @@ export default class Care {
   }
   feed(hitTest) {
     if (hitTest === true) {
-      this.currentValue += 15;
+      this.currentValue += 1;
     }
     return this.currentValue;
   }
-  drink() {}
+  drink(hitTest) {
+    if (hitTest === true) {
+      this.currentValue += 1;
+    }
+    return this.currentValue;
+  }
 }
