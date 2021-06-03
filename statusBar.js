@@ -14,8 +14,6 @@ export class HappinessBar extends Statusbar {
   render() {
     if (this.currentValue > this.maxValue) {
       this.currentValue = this.maxValue;
-      console.log("hi");
-      console.log(this.currentValue);
     }
     strokeWeight(1);
     stroke(85, 91, 110);

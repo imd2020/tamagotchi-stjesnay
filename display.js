@@ -29,6 +29,7 @@ export default class Display {
     textAlign(RIGHT);
     text("xxx", this.x + 780, this.y + 48);
   }
+
   all() {
     this.foodButton.render();
     this.drinkButton.render();
@@ -38,7 +39,9 @@ export default class Display {
     this.levelBar.render();
   }
   system() {
+    this.care.currentValue = this.happyBar.currentValue;
     this.happyBar.currentValue = this.care.feed(this.foodButton.hitTest());
+
     this.happyBar.currentValue = this.care.drink(this.drinkButton.hitTest());
     if (this.happyBar.currentValue % 15 === 0) {
       this.levelBar.currentValue += 25;

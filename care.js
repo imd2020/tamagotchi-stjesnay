@@ -6,6 +6,7 @@ export default class Care {
     if (hitTest === true) {
       this.currentValue += 1;
     }
+
     return this.currentValue;
   }
   drink(hitTest) {
