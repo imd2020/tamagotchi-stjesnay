@@ -29,8 +29,13 @@ function draw() {
 }
 
 function mouseClicked() {
-  display.system();
+  display.systemClicked();
 }
 
+function keyTyped() {
+  display.systemTyped();
+}
+
+window.keyTyped = keyTyped;
 window.draw = draw;
 window.mouseClicked = mouseClicked;

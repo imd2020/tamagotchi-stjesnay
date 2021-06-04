@@ -26,8 +26,9 @@ export default class Button {
     textAlign(CENTER);
     text(this.name, this.x + 100, this.y + 30);
   }
-  hitTest() {
+  hitTest(money) {
     if (
+      money > 0 &&
       mouseX < this.x + 200 &&
       mouseX > this.x &&
       mouseY < this.y + 40 &&
