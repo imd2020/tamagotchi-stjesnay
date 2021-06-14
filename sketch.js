@@ -23,7 +23,25 @@ function draw() {
 }
 
 function mouseClicked() {
-  display.systemClicked();
+  if (display.screenState === 0) {
+    if (
+      display.tutorial.hitTestNext() &&
+      (display.tutorialScreen === 1 || display.tutorialScreen === 2)
+    ) {
+      display.tutorialScreen += 1;
+    }
+    if (
+      display.tutorial.hitTestBack() &&
+      (display.tutorialScreen === 2 || display.tutorialScreen === 3)
+    ) {
+      display.tutorialScreen -= 1;
+    }
+    if (display.startButton.hitTest()) {
+      display.screenState = 1;
+    }
+  } else if (display.screenState === 1) {
+    display.systemClicked();
+  }
 }
 
 function keyTyped() {

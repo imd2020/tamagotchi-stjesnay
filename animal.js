@@ -24,22 +24,4 @@ export default class Animal {
       image(pic[4], this.x, this.y + 40, 400, 400);
     }
   }
-  startrender() {
-    image(pic[0], this.x + 170, this.y, 200, 200);
-    fill(85, 91, 110);
-    text("FEED him and give", this.x + 470, this.y - 20);
-    text("him something to DRINK", this.x + 500, this.y + 30);
-    /*fill(250, 249, 249);
-    rect(this.x + 300, this.y + 150, 130, 10);
-    triangle(
-      this.x + 430,
-      this.y + 140,
-      this.x + 430,
-      this.y + 170,
-      this.x + 450,
-      this.y + 155
-    );
-    image(pic[4], this.x + 400, this.y - 100, 350, 350);
-    */
-  }
 }

@@ -3,13 +3,16 @@ import Key from "./key.js";
 import Animal from "./animal.js";
 import { HappinessBar, LevelBar } from "./statusbar.js";
 import Care from "./care.js";
+import Tutorial from "./tutorial.js";
 
 export default class Display {
   constructor(x, y, screenState) {
     this.x = x;
     this.y = y;
+    this.tutorialScreen = 1;
     this.screenState = screenState;
     this.money = 10;
+    this.tutorial = new Tutorial(this.x + 200, this.y + 50);
     this.startButton = new Button(this.x + 350, this.y + 450, "Start");
     this.foodButton = new Button(600, 150, "feed");
     this.drinkButton = new Button(600, 220, "give Water");
@@ -88,16 +91,25 @@ export default class Display {
     this.key.render(this.showKey());
   }
   startScreen() {
+    let tutorialScreen = this.tutorialScreen;
     fill(190, 227, 219);
     strokeWeight(5);
     stroke(85, 91, 110);
     rect(this.x, this.y, 900, 600);
+
+    this.startButton.render();
     fill(250, 249, 249);
     strokeWeight(2);
     rect(this.x + 200, this.y + 50, 500, 300);
-    this.startButton.render();
-    this.animal.startrender();
-    text("next", this.x + 660, this.y + 330);
+    if (tutorialScreen === 1) {
+      this.tutorial.renderScreen1();
+    }
+    if (tutorialScreen === 2) {
+      this.tutorial.renderScreen2();
+    }
+    if (tutorialScreen === 3) {
+      this.tutorial.renderScreen3();
+    }
   }
   background() {
     fill(250, 249, 249);
@@ -136,10 +148,6 @@ export default class Display {
       this.animal.state += 1;
       this.levelBar.currentValue = 0;
       this.happyBar.currentValue = 61;
-    }
-    //-----------------
-    if (this.startButton.hitTest()) {
-      this.screenState = 1;
     }
   }
   systemTyped() {
