@@ -5,10 +5,12 @@ import { HappinessBar, LevelBar } from "./statusbar.js";
 import Care from "./care.js";
 
 export default class Display {
-  constructor(x, y) {
+  constructor(x, y, screenState) {
     this.x = x;
     this.y = y;
+    this.screenState = screenState;
     this.money = 10;
+    this.startButton = new Button(this.x + 350, this.y + 450, "Start");
     this.foodButton = new Button(600, 150, "feed");
     this.drinkButton = new Button(600, 220, "give Water");
     this.animal = new Animal(this.x + 50, this.y + 130);
@@ -75,6 +77,28 @@ export default class Display {
     this.alphabet = random(this.alphabetArraySmall);
     this.alphabetShown;
   }
+  mainScreen() {
+    this.background();
+    this.foodButton.render();
+    this.drinkButton.render();
+    this.animal.render();
+    this.coin();
+    this.happyBar.render();
+    this.levelBar.render();
+    this.key.render(this.showKey());
+  }
+  startScreen() {
+    fill(190, 227, 219);
+    strokeWeight(5);
+    stroke(85, 91, 110);
+    rect(this.x, this.y, 900, 600);
+    fill(250, 249, 249);
+    strokeWeight(2);
+    rect(this.x + 200, this.y + 50, 500, 300);
+    this.startButton.render();
+    this.animal.startrender();
+    text("next", this.x + 660, this.y + 330);
+  }
   background() {
     fill(250, 249, 249);
     strokeWeight(5);
@@ -92,7 +116,6 @@ export default class Display {
     textAlign(RIGHT);
     text(this.money, this.x + 780, this.y + 48);
   }
-
   showKey() {
     for (let i = 0; i < this.alphabetArraySmall.length; i++) {
       if (this.alphabetArraySmall[i] === this.alphabet) {
@@ -102,25 +125,10 @@ export default class Display {
 
     return this.alphabetShown;
   }
-
-  all() {
-    this.foodButton.render();
-    this.drinkButton.render();
-    this.animal.render();
-    this.coin();
-    this.happyBar.render();
-    this.levelBar.render();
-    this.key.render(this.showKey());
-  }
   systemClicked() {
     this.care.currentValue = this.happyBar.currentValue;
-    this.happyBar.currentValue = this.care.feed(
-      this.foodButton.hitTest(this.money)
-    );
-
-    this.happyBar.currentValue = this.care.drink(
-      this.drinkButton.hitTest(this.money)
-    );
+    this.happyBar.currentValue = this.care.feed(this.foodButton.hitTest());
+    this.happyBar.currentValue = this.care.drink(this.drinkButton.hitTest());
     if (this.happyBar.currentValue % 15 === 0) {
       this.levelBar.currentValue += 25;
     }
@@ -128,6 +136,10 @@ export default class Display {
       this.animal.state += 1;
       this.levelBar.currentValue = 0;
       this.happyBar.currentValue = 61;
+    }
+    //-----------------
+    if (this.startButton.hitTest()) {
+      this.screenState = 1;
     }
   }
   systemTyped() {
