@@ -2,6 +2,8 @@ let pic = [];
 pic[0] = loadImage("pics/level-2.png");
 pic[1] = loadImage("pics/level-7.png");
 
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 export default class Tutorial {
   constructor(x, y) {
     this.x = x;
@@ -53,8 +55,6 @@ export default class Tutorial {
     text("back", this.x + 40, this.y + 290);
   }
   hitTestNext() {
-    //rect(this.x + 440, this.y + 275, 40, 15);
-
     if (
       mouseX > this.x + 440 &&
       mouseX < this.x + 480 &&
@@ -68,8 +68,6 @@ export default class Tutorial {
   }
 
   hitTestBack() {
-    //rect(this.x + 20, this.y + 275, 40, 15);
-
     if (
       mouseX > this.x + 20 &&
       mouseX < this.x + 60 &&

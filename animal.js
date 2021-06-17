@@ -1,9 +1,13 @@
-let pic = [];
-pic[0] = loadImage("pics/level-2.png");
-pic[1] = loadImage("pics/level-4.png");
-pic[2] = loadImage("pics/level-5.png");
-pic[3] = loadImage("pics/level-6.png");
-pic[4] = loadImage("pics/level-7.png");
+//---image loader---
+let pic = [
+  loadImage("pics/level-2.png"),
+  loadImage("pics/level-4.png"),
+  loadImage("pics/level-5.png"),
+  loadImage("pics/level-6.png"),
+  loadImage("pics/level-7.png"),
+];
+
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 export default class Animal {
   constructor(x, y) {
@@ -12,6 +16,7 @@ export default class Animal {
     this.state = 1;
   }
   render() {
+    //---check level---
     if (this.state === 1) {
       image(pic[0], this.x + 30, this.y + 150, 300, 300);
     } else if (this.state === 2) {
@@ -21,7 +26,7 @@ export default class Animal {
     } else if (this.state === 4) {
       image(pic[3], this.x, this.y + 20, 380, 380);
     } else if (this.state === 5) {
-      image(pic[4], this.x, this.y + 40, 400, 400);
+      image(pic[4], this.x + 30, this.y + 40, 400, 400);
     }
   }
 }

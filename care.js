@@ -4,6 +4,7 @@ export default class Care {
     this.money = money;
   }
   feed(hitTest) {
+    //---increase happiness,decrease money---
     if (hitTest === true && this.money > 1) {
       this.currentValue += 1;
       this.money -= 2;
@@ -12,6 +13,7 @@ export default class Care {
     return this.currentValue;
   }
   drink(hitTest) {
+    //---increase happiness,decrease money---
     if (hitTest === true && this.money > 1) {
       this.currentValue += 1;
       this.money -= 2;

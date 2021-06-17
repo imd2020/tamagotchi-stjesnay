@@ -3,10 +3,12 @@ export default class Button {
     this.x = x;
     this.y = y;
     this.name = name;
+    //---------------
     this.color = color(137, 176, 174);
   }
 
   render() {
+    //---hover_effect---
     noStroke();
     if (
       mouseX < this.x + 200 &&
@@ -18,6 +20,7 @@ export default class Button {
     } else {
       this.color = color(137, 176, 174);
     }
+    //---create button---
     fill(this.color);
     rect(this.x, this.y, 200, 40, 30);
     fill(255);

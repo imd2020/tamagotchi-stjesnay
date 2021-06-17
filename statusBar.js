@@ -7,10 +7,9 @@ export class Statusbar {
   }
 }
 
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 export class HappinessBar extends Statusbar {
-  constructor(x, y, currentValue, maxValue) {
-    super(x, y, currentValue, maxValue);
-  }
   render() {
     if (this.currentValue > this.maxValue) {
       this.currentValue = this.maxValue;
@@ -22,7 +21,7 @@ export class HappinessBar extends Statusbar {
     text("Happiness", this.x + 75, this.y - 10);
     noStroke();
 
-    fill(200);
+    fill(255);
     rect(this.x, this.y, 150, 15, 20);
     fill(190, 227, 219);
     rect(this.x, this.y, this.currentValue, 15, 20, 0, 0, 20);
@@ -43,10 +42,9 @@ export class HappinessBar extends Statusbar {
   }
 }
 
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 export class LevelBar extends Statusbar {
-  constructor(x, y, currentValue, maxValue) {
-    super(x, y, currentValue, maxValue);
-  }
   render() {
     if (this.currentValue > this.maxValue) {
       this.currentValue = this.maxValue;
@@ -55,10 +53,10 @@ export class LevelBar extends Statusbar {
     stroke(85, 91, 110);
     fill(85, 91, 110);
     textSize(15);
-    text("Level", this.x + 75, this.y - 10);
+    text("Level", this.x + 40, this.y - 10);
     noStroke();
 
-    fill(200);
+    fill(255);
     rect(this.x, this.y, 150, 15, 20);
     fill(255, 214, 186);
     rect(this.x, this.y, this.currentValue, 15, 20, 0, 0, 20);

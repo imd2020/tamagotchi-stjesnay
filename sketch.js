@@ -5,21 +5,27 @@ light blue: 190, 227, 219
 white: 250, 249, 249
 pink: 255, 214, 186 */
 
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
 import Display from "./display.js";
+
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
 const X = 0;
 const Y = 0;
 let screenState = 0;
 let display = new Display(X, Y, screenState);
 
-function draw() {
-  background(255);
-  if (display.screenState === 0) {
-    display.startScreen();
-  }
-  if (display.screenState === 1) {
-    display.mainScreen();
-  }
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+function reset() {
+  display.screenState = 0;
+  display.tutorialScreen = 1;
+  display.money = 100;
+  display.care.money = display.money;
+  display.animal.state = 1;
+  display.happyBar.currentValue = 61;
+  display.levelBar.currentValue = 0;
 }
 
 function mouseClicked() {
@@ -41,6 +47,10 @@ function mouseClicked() {
     }
   } else if (display.screenState === 1) {
     display.systemClicked();
+  } else if (display.screenState === 2) {
+    if (display.replayButton.hitTest()) {
+      reset();
+    }
   }
 }
 
@@ -48,6 +58,22 @@ function keyTyped() {
   display.systemTyped();
 }
 
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+function draw() {
+  background(255);
+  if (display.screenState === 0) {
+    display.startScreen();
+  } else if (display.screenState === 1) {
+    display.mainScreen();
+  } else if (display.screenState === 2) {
+    display.endScreen();
+  }
+}
+
+//–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+
+//window.preload = preload;
 window.keyTyped = keyTyped;
 window.draw = draw;
 window.mouseClicked = mouseClicked;
