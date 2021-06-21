@@ -95,7 +95,7 @@ export default class Display {
   }
   endScreen() {
     this.background();
-    fill(137, 176, 174);
+    fill(85, 91, 110);
     noStroke();
     textSize(50);
     textAlign(CENTER);

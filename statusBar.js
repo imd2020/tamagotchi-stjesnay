@@ -23,7 +23,7 @@ export class HappinessBar extends Statusbar {
 
     fill(255);
     rect(this.x, this.y, 150, 15, 20);
-    fill(190, 227, 219);
+    fill(137, 176, 174);
     rect(this.x, this.y, this.currentValue, 15, 20, 0, 0, 20);
 
     strokeWeight(1);
