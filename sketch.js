@@ -47,7 +47,7 @@ function mouseClicked() {
     }
   } else if (display.screenState === 1) {
     display.systemClicked();
-  } else if (display.screenState === 2) {
+  } else if (display.screenState === 2 || display.screenState === 3) {
     if (display.replayButton.hitTest()) {
       reset();
     }
@@ -68,12 +68,13 @@ function draw() {
     display.mainScreen();
   } else if (display.screenState === 2) {
     display.endScreen();
+  } else if (display.screenState === 3) {
+    display.deathScreen();
   }
 }
 
 //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
-//window.preload = preload;
 window.keyTyped = keyTyped;
 window.draw = draw;
 window.mouseClicked = mouseClicked;

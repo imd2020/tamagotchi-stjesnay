@@ -16,6 +16,7 @@ export default class Display {
     //---------------
     this.tutorialScreen = 1;
     this.money = 100;
+    this.notClicked = 0;
     //---create objects---
     this.tutorial = new Tutorial(this.x + 200, this.y + 50);
     this.startButton = new Button(this.x + 350, this.y + 450, "Start");
@@ -89,8 +90,12 @@ export default class Display {
     this.happyBar.render();
     this.levelBar.render();
     this.key.render(this.alphabet);
+    this.reduceHappiness();
     if (this.animal.state === 5) {
       this.screenState = 2;
+    }
+    if (this.happyBar.currentValue <= 0) {
+      this.screenState = 3;
     }
   }
   endScreen() {
@@ -104,6 +109,23 @@ export default class Display {
     text("You Did An", this.x + 600, this.y + 190);
     text("Amazing Job", this.x + 700, this.y + 250);
     this.animal.render();
+    this.replayButton.render();
+  }
+  deathScreen() {
+    fill(40, 40, 40);
+    strokeWeight(5);
+    stroke(40, 40, 40);
+    rect(this.x, this.y, 900, 600);
+    fill(160, 0, 0);
+    noStroke();
+    textSize(100);
+    textAlign(CENTER);
+    text("! ! ! DEATH ! ! !", this.x + 450, this.y + 150);
+    textSize(40);
+    text("Try To Do", this.x + 450, this.y + 250);
+    text("Better Next Time", this.x + 450, this.y + 320);
+
+    this.replayButton.x = 350;
     this.replayButton.render();
   }
   background() {
@@ -124,16 +146,32 @@ export default class Display {
     textAlign(RIGHT);
     text(this.money, this.x + 780, this.y + 48);
   }
+  reduceHappiness() {
+    if (
+      this.drinkButton.hitTest() === false &&
+      this.foodButton.hitTest() === false
+    ) {
+      this.notClicked += 1;
+    }
+    if (this.notClicked === 150) {
+      this.notClicked = 0;
+      this.happyBar.currentValue -= 5;
+    }
+  }
   systemClicked() {
     this.care.currentValue = this.happyBar.currentValue;
     this.happyBar.currentValue = this.care.feed(this.foodButton.hitTest());
     this.happyBar.currentValue = this.care.drink(this.drinkButton.hitTest());
-    if (this.happyBar.currentValue % 15 === 0) {
-      this.levelBar.currentValue += 25;
-    }
+
+    this.levelBar.currentValue = this.levelBar.checkHappiness(
+      this.happyBar.currentValue
+    );
+
     if (this.levelBar.currentValue === this.levelBar.maxValue) {
       this.animal.state += 1;
       this.levelBar.currentValue = 0;
+      this.levelBar.level = 0;
+      this.levelBar.minLevel = 0;
       this.happyBar.currentValue = 61;
     }
   }
