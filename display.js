@@ -5,6 +5,7 @@ import Animal from "./animal.js";
 import { HappinessBar, LevelBar } from "./statusbar.js";
 import Care from "./care.js";
 import Tutorial from "./tutorial.js";
+//import gsap from "./gsap.min.js";
 
 //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
@@ -181,5 +182,24 @@ export default class Display {
       this.money += 10;
     }
     this.care.money = this.money;
+  }
+  animateTamagotchi() {
+    if (this.animal.state === 1) {
+      gsap.to(this.animal, {
+        duration: 0.3,
+        ease: "linear",
+        y: 50,
+        onComplete: () => {
+          gsap.to(this.animal, {
+            duration: 1.5,
+            ease: "elastic",
+            y: 130,
+            onComplete: () => {
+              this.animateTamagotchi();
+            },
+          });
+        },
+      });
+    }
   }
 }

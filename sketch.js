@@ -60,6 +60,8 @@ function keyTyped() {
 
 //–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
 
+display.animateTamagotchi();
+
 function draw() {
   background(255);
   if (display.screenState === 0) {
