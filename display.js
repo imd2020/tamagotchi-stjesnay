@@ -2,7 +2,7 @@
 import Button from "./button.js";
 import Key from "./key.js";
 import Animal from "./animal.js";
-import { HappinessBar, LevelBar } from "./statusbar.js";
+import { HappinessBar, LevelBar } from "./statusBar.js";
 import Care from "./care.js";
 import Tutorial from "./tutorial.js";
 //import gsap from "./gsap.min.js";
